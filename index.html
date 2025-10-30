@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTech Academy - Gerenciamento de Alunos</title>
+</head>
+<body>
+    <h1>Gerenciamento de Alunos - DevTech Academy</h1>
+
+    <h2>Cadastrar Aluno</h2>
+    <form id="student-form">
+        <input type="hidden" id="student-id">
+        
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" required> <label for="idade">Idade:</label>
+        <input type="number" id="idade" required> <label for="curso">Curso:</label>
+        <select id="curso" required> <option value="JavaScript">JavaScript</option> <option value="Python">Python</option> <option value="Java">Java</option> </select>
+
+        <label for="notaFinal">Nota Final:</label>
+        <input type="number" id="notaFinal" step="0.1" min="0" max="10" required> <button type="submit">Cadastrar</button>
+    </form>
+
+    <h2>Alunos Cadastrados</h2>
+    <table border="1" style="width:100%; text-align: left;">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Curso</th>
+                <th>Nota Final</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="student-table-body">
+            </tbody>
+    </table>
+    
+    <div id="reports" style="margin-top: 20px;">
+        <h2>Relatórios</h2> <button id="report-aprovados">Listar Aprovados</button> <button id="report-media-notas">Média das Notas</button> <button id="report-media-idades">Média das Idades</button> <button id="report-ordem-alfabetica">Nomes em Ordem Alfabética</button> <button id="report-alunos-curso">Alunos por Curso</button> <div id="report-output" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc;">
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
