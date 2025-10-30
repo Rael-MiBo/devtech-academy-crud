@@ -1,4 +1,3 @@
-// Exercício 2: Criação da Classe Aluno
 class Aluno {
     constructor(nome, idade, curso, notaFinal) {
         this.nome = nome;
@@ -7,26 +6,22 @@ class Aluno {
         this.notaFinal = notaFinal;
     }
 
-    // Método para verificar se o aluno foi aprovado (nota >= 7)
     isAprovado() {
         return this.notaFinal >= 7;
     }
 
-    // Método para formatar os dados do aluno como string
     toString() {
         return `Nome: ${this.nome}, Idade: ${this.idade}, Curso: ${this.curso}, Nota Final: ${this.notaFinal}`;
     }
 }
 
-// Armazenamento em memória (array de objetos)
 let students = [];
 let isEditing = false;
 let currentStudentId = null;
 
-// Função para renderizar os alunos na tabela
 function renderTable() {
     const tableBody = document.getElementById('student-table-body');
-    tableBody.innerHTML = ''; // Limpa a tabela antes de renderizar
+    tableBody.innerHTML = '';
 
     students.forEach((student, index) => {
         const row = document.createElement('tr');
@@ -43,12 +38,10 @@ function renderTable() {
         tableBody.appendChild(row);
     });
 
-    addTableEvents(); // Adiciona os eventos aos novos botões
+    addTableEvents();
 }
 
-// Exercício 3: Adicionar escutadores de eventos aos botões da tabela
 function addTableEvents() {
-    // Evento de Excluir com Arrow Function
     document.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', (event) => {
             const index = event.target.getAttribute('data-index');
@@ -58,7 +51,6 @@ function addTableEvents() {
         });
     });
 
-    // Evento de Editar com Função Anônima
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', function() {
             const index = this.getAttribute('data-index');
@@ -76,39 +68,34 @@ function addTableEvents() {
     });
 }
 
-// Manipulador de evento para o formulário (Exercício 1 e 3)
 document.getElementById('student-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita que a página recarregue
+    event.preventDefault();
 
-    // Coleta dos dados do formulário
     const nome = document.getElementById('nome').value;
     const idade = parseInt(document.getElementById('idade').value);
     const curso = document.getElementById('curso').value;
     const notaFinal = parseFloat(document.getElementById('notaFinal').value);
 
-    // Cria uma instância da classe Aluno (Exercício 2)
     const studentData = new Aluno(nome, idade, curso, notaFinal);
 
     if (isEditing) {
         const id = parseInt(document.getElementById('student-id').value);
-        students[id] = studentData; // Atualiza o aluno existente
+        students[id] = studentData;
         isEditing = false;
         document.querySelector('#student-form button').textContent = 'Cadastrar';
         alert('Aluno atualizado com sucesso!');
     } else {
-        students.push(studentData); // Adiciona a nova instância ao array
+        students.push(studentData);
         alert('Aluno cadastrado com sucesso!');
     }
     
-    renderTable(); // Atualiza a tabela
-    this.reset(); // Limpa o formulário
+    renderTable();
+    this.reset();
     document.getElementById('student-id').value = '';
 });
 
-// --- Exercício 4: Relatórios ---
 const reportOutput = document.getElementById('report-output');
 
-// 1. Listar alunos aprovados (notaFinal >= 7) usando filter
 document.getElementById('report-aprovados').addEventListener('click', () => {
     const aprovados = students.filter(student => student.isAprovado());
     reportOutput.innerHTML = '<h3>Alunos Aprovados</h3>';
@@ -121,7 +108,6 @@ document.getElementById('report-aprovados').addEventListener('click', () => {
     });
 });
 
-// 2. Calcular e exibir a média das notas finais usando reduce
 document.getElementById('report-media-notas').addEventListener('click', () => {
     if (students.length === 0) {
         reportOutput.innerHTML = '<h3>Média das Notas</h3><p>Nenhum aluno cadastrado.</p>';
@@ -132,7 +118,6 @@ document.getElementById('report-media-notas').addEventListener('click', () => {
     reportOutput.innerHTML = `<h3>Média das Notas</h3><p>A média final da turma é: ${media.toFixed(2)}</p>`;
 });
 
-// 3. Calcular e exibir a média das idades usando reduce
 document.getElementById('report-media-idades').addEventListener('click', () => {
     if (students.length === 0) {
         reportOutput.innerHTML = '<h3>Média das Idades</h3><p>Nenhum aluno cadastrado.</p>';
@@ -143,7 +128,6 @@ document.getElementById('report-media-idades').addEventListener('click', () => {
     reportOutput.innerHTML = `<h3>Média das Idades</h3><p>A média de idade da turma é: ${media.toFixed(1)} anos</p>`;
 });
 
-// 4. Listar os nomes dos alunos em ordem alfabética usando map e sort
 document.getElementById('report-ordem-alfabetica').addEventListener('click', () => {
     if (students.length === 0) {
         reportOutput.innerHTML = '<h3>Nomes em Ordem Alfabética</h3><p>Nenhum aluno cadastrado.</p>';
@@ -156,7 +140,6 @@ document.getElementById('report-ordem-alfabetica').addEventListener('click', () 
     });
 });
 
-// 5. Mostrar a quantidade de alunos por curso usando reduce
 document.getElementById('report-alunos-curso').addEventListener('click', () => {
     if (students.length === 0) {
         reportOutput.innerHTML = '<h3>Alunos por Curso</h3><p>Nenhum aluno cadastrado.</p>';
@@ -173,5 +156,4 @@ document.getElementById('report-alunos-curso').addEventListener('click', () => {
     }
 });
 
-// Renderização inicial para garantir que a tabela e os eventos estejam prontos
 renderTable();
